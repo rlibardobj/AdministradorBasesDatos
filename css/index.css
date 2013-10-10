@@ -1,0 +1,92 @@
+/* 
+    Document   : index
+    Created on : 04/10/2013, 07:28:52 PM
+    Author     : Ronny
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* General Demo Style */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+body{
+     background: #ddd url(../img/bg.jpg) repeat top left;
+}
+.contenido {
+    background: #ddd url(../img/bg.jpg) repeat top left;
+    box-shadow:0 0 30px rgba(0,0,0,0.2);
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 1em;
+    width: 1000px;  
+}
+#graphic{
+    margin:0 auto;
+    height: 700px;
+    width: 800px;
+}
+#ingresoSistema {
+    background-color: grey;
+    border-radius: 20px;
+    height: 195px;
+    margin: 0 auto;
+    margin-top: 100px;
+    overflow: hidden;
+    padding: 15px;         
+    width: 300px;
+}
+/*******************************
+NAV BAR
+********************************/
+nav{   
+    display:block;
+    margin: 0 auto;
+    padding:0;
+    width: 600px;
+}
+nav li {
+    display:inline;
+}
+nav li a {   
+    font-family:Arial;
+    font-size:12px;
+    text-decoration: none;
+    float:left;
+    padding:10px;
+    background-color: #333333;
+    color:#ffffff;
+    border-bottom:1px;
+    border-bottom-color:#000000;
+    border-bottom-style:solid;
+}
+nav li a:hover {
+    background-color:#9B1C26;
+    padding-bottom:12px;
+    border-bottom:2px;
+    border-bottom-color:#000000;
+    border-bottom-style:solid;
+    margin:-1px;
+}
+
+/*******************************
+          Diaglog
+********************************/
+.dialog {
+        display:none;
+        background: #F8FFD8; 
+	color: black;
+}
+#background
+{
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    background:#000;
+    opacity: .0;
+    filter:alpha(opacity=0);
+    z-index:50;
+    display:none;
+}
+
