@@ -18,13 +18,26 @@ $(function() {
     });
 });
 
-function conexion(){
-    // var id = document.getElementById("id_collection").innerHTML;
+var server;
+var db;
+var user;
+var pass;
+
+function conexion(servidor,basedatos,usuario,contraseña,query){
+    server = servidor;
+    db = basedatos;
+    user = usuario;
+    pass = contraseña;
     $(document).ready(function() {
         $.ajax({
             url: "sql_server.php",
             type: "post",
-            data: {function: "connectionBD"}
+            data:{server:server,
+                  db:db,
+                  user:user,
+                  pass:pass,
+                  query:query
+            }
         }).done(function(response) {
             alert(response);
         });

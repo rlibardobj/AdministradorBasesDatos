@@ -1,7 +1,4 @@
 <!DOCTYPE html">
-<?php 
-require 'sql_server.php';
-?>
 <html>
 
     <head>

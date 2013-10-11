@@ -1,24 +1,21 @@
-<?php
-
-
-
-function connectionBD(){
-    /*$server = "localhost\SQL2012";
-    $connectionInfo = array("Database" => "transportePublico_semana7", "UID" => "sa", "PWD" => "12345");
+<?php    
+    $server = $_POST['server'];
+    $database = $_POST['db'];
+    $user = $_POST['user'];
+    $pass = $_POST['pass'];
+    $query = $_POST['query'];
+    $connectionInfo = array("Database" => $database, "UID" => $user, "PWD" => $pass);
     $conn = sqlsrv_connect($server, $connectionInfo);
+    $return="";
     if (!$conn) {
-        die("Could not connect to database");
+        $return="false";
     }
-    $sql = "select name from BD_InfoKB";
-    $stmt = sqlsrv_query($conn, $sql);
+    $stmt = sqlsrv_query($conn, $query);
     if ($stmt === FALSE)
         die(print_r(sqlsrv_errors(), true));
-    /*echo "<table border =1>";
     while (sqlsrv_fetch($stmt)) {
         $id = sqlsrv_get_field($stmt, 0);
-        echo "<tr><td>$id</td></tr>";
+        $return .= $id;
     }
-    echo "</table>";*/
-    echo "hola";
-}
+    echo $return;
 ?>
