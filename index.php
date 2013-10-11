@@ -74,19 +74,19 @@
             <section id="dialog" class="dialog" title="Conectar a la Base de Datos">
 		<form class="form-1" method="post" action="javascript:conexion();" >
                 	<p class="field">
-                        	<input type="text" name="login" placeholder="Servidor">
+                        	<input id="serverName" type="text" name="login" placeholder="Servidor">
 				<i class=""></i>
 			</p>
 			<p class="field">
-				<input type="password" name="password" placeholder="Base Datos">
+				<input id="dataBase" type="password" name="password" placeholder="Base Datos">
 				<i class=""></i>
 			</p>
 			<p class="field">
-				<input type="text" name="login" placeholder="Usuasrio">
+				<input id="userName" type="text" name="login" placeholder="Usuario">
 				<i class="icon-user icon-large"></i>
 			</p>
 			<p class="field">
-				<input type="password" name="password" placeholder="Contraseña">
+				<input id="password" type="password" name="password" placeholder="Contraseña">
 				<i class="icon-lock icon-large"></i>
 			</p>
 			<p class="submit">

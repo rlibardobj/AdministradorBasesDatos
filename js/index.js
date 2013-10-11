@@ -24,10 +24,10 @@ var user;
 var pass;
 
 function conexion(servidor,basedatos,usuario,contraseña,query){
-    server = servidor;
-    db = basedatos;
-    user = usuario;
-    pass = contraseña;
+    server = document.getElementById("serverName").value;
+    db = document.getElementById("dataBase").value;
+    user = document.getElementById("userName").value;
+    pass = document.getElementById("password").value;
     $(document).ready(function() {
         $.ajax({
             url: "sql_server.php",
