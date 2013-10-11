@@ -16,14 +16,15 @@ body{
     background: #ddd url(../img/bg.jpg) repeat top left;
     box-shadow:0 0 30px rgba(0,0,0,0.2);
     margin: 0 auto;
+    min-height: 800px;
     overflow: hidden;
     padding: 1em;
     width: 1000px;  
 }
-#graphic{
+.graphic{
     margin:0 auto;
-    height: 700px;
-    width: 800px;
+    height: 400px;
+    width: 500px;
 }
 #ingresoSistema {
     background-color: grey;
