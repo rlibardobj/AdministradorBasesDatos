@@ -75,7 +75,7 @@ require 'sql_server.php';
             
             <div id="background"></div>
             <section id="dialog" class="dialog" title="Conectar a la Base de Datos">
-		<form class="form-1" method="post" action="">
+		<form class="form-1" method="post" action="javascript:conexion();" >
                 	<p class="field">
                         	<input type="text" name="login" placeholder="Servidor">
 				<i class=""></i>
@@ -93,7 +93,7 @@ require 'sql_server.php';
 				<i class="icon-lock icon-large"></i>
 			</p>
 			<p class="submit">
-				<button type="submit" name="submit" action=""><i class="icon-arrow-right icon-large"></i></button>
+				<button type="submit" name="submit"><i class="icon-arrow-right icon-large"></i></button>
 			</p>
 		</form>
 	  </section>
