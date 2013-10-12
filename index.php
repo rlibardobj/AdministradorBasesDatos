@@ -40,7 +40,7 @@
             <nav>
                 <li><a href="#">Principal</a></li>
                 <li><a href="#">Crear Base de Datos</a></li>
-                <li><a href="#">Añadir FileGroup</a></li>
+                <li><a id="AddFileGroup" href="#">Añadir FileGroup</a></li>
                 <li><a href="#">Añadir Archivos a FG</a></li>
                 <li><a id="conexion" href="#">Conexión a BD</a></li>
             </nav>           
@@ -76,6 +76,17 @@
                         <input id="password" type="password" name="password" placeholder="Contraseña">
                         <i class="icon-lock icon-large"></i>
                     </p>
+                    <p class="submit">
+                        <button type="submit" name="submit"><i class="icon-arrow-right icon-large"></i></button>
+                    </p>
+                </form>
+            </section>
+            
+            <section id="NewFileGroup" class="dialog" title="New Filegroup">
+                <form class="form-1" method="post" action="javascript:AddFileGroup();" >
+                    <p class="field">
+                        <input id="FGName" type="text" name="Name" placeholder="FileGroup">
+                        <i class=""></i>
                     <p class="submit">
                         <button type="submit" name="submit"><i class="icon-arrow-right icon-large"></i></button>
                     </p>

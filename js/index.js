@@ -28,6 +28,26 @@ $(function() {
     });
 });
 
+$(function() {
+    $('#AddFileGroup').click(function() {
+        $('#background').animate({
+            'opacity': '.80'
+        });
+        $('#background').css('display', 'block');
+        $('#background').click(function() {
+            $(".ui-dialog-content").dialog("close");
+            $('#background').hide();
+        });
+        $("#NewFileGroup").dialog({
+            height: 350,
+            width: 400
+        });
+        $('#NewFileGroup').bind('dialogclose', function(event) {
+            $('#background').hide();
+        });
+    });
+});
+
 
 function drawChart(int) {
     // Create the data table.
@@ -63,7 +83,7 @@ function conexion(query) {
         $.ajax({
             url: "sql_server.php",
             type: "post",
-            dataType : 'json',
+            dataType: 'json',
             data: {server: server,
                 db: db,
                 user: user,
@@ -97,6 +117,38 @@ function conexion(query) {
         });
     });
 
+    function AddFileGroup() {
+        var fileGroup = document.getElementById("FGName").value;
+        alert(fileGroup);
+        alert(server);
+        $(document).ready(function() {
+            $.ajax({
+                url: "AddFileGroup.php",
+                type: "post",
+                dataType: 'json',
+                data: {server: server,
+                    db: db,
+                    user: user,
+                    pass: pass,
+                    fileGroup: fileGroup
+                }
+            }).done(function(response) {
+                if (response == -1) {
+                    alert("Error de conexion");
+                }
+                else {
+                    if (response == -2) {
+                        alert("Error de consulta sql");
+                    }
+                    else {
+                        if (response == "success")
+                            alert("FileGroup añadido con éxito");
+                        else alert("Went Through php but nothing happened");
+                    }
+                }
+            });
+        });
+    }
 }
 
 
