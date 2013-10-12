@@ -63,6 +63,7 @@ function conexion(query) {
         $.ajax({
             url: "sql_server.php",
             type: "post",
+            dataType : 'json',
             data: {server: server,
                 db: db,
                 user: user,
@@ -78,6 +79,7 @@ function conexion(query) {
                     alert("Error de consulta sql");
                 }
                 else {
+                    alert(response);
                     //Oculta ventana emergente
                     $(".ui-dialog-content").dialog("close");
                     $('#background').hide();

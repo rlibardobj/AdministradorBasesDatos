@@ -13,12 +13,13 @@ if (!$conn) {
 } else {
     $stmt = sqlsrv_query($conn, $query);
     if ($stmt === FALSE)
-        $return = -2;
+        $return = -1;
     else {
         while (sqlsrv_fetch($stmt)) {
             $id = sqlsrv_get_field($stmt, 0);
             $return .= $id;
         }
+        $return = json_encode($return);
     }
 }
 echo $return;
