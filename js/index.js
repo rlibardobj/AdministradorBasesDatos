@@ -58,7 +58,7 @@ function conexion() {
     pass = document.getElementById("password").value;
     $(document).ready(function() {
         $.ajax({
-            url: "sql_server.php",
+            url: "php/conexion.php",
             type: "post",
             dataType : 'json',
             data: {server: server,
