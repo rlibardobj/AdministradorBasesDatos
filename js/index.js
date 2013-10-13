@@ -29,21 +29,20 @@ $(function() {
 });
 
 
-function drawChart(int) {
+function drawChart(int, uso, archivo) {
     // Create the data table.
     var nombre = 'graphic' + int;
+    var sin_uso = 100- uso;
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Topping');
     data.addColumn('number', 'Slices');
     data.addRows([
-        ['FG1', 3],
-        ['FG2', 1],
-        ['FG3', 1],
-        ['FG4', 1],
-        ['FG5', 2]
+        ['Espacio Disponible', sin_uso],
+        ['Espacio Usado', uso]
     ]);
     // Set chart options
-    var options = {'title': 'Administrador de Base de Datos SQL server',
+    var options = {'title': 'Porcentajes para el archivo: ' + archivo ,
+        is3D:true,
         'width': 500,
         'height': 400};
     // Instantiate and draw our chart, passing in some options.
@@ -52,13 +51,11 @@ function drawChart(int) {
 
 }
 
-function conexion(query) {
+function conexion() {
     server = document.getElementById("serverName").value;
     db = document.getElementById("dataBase").value;
     user = document.getElementById("userName").value;
     pass = document.getElementById("password").value;
-    cantidad = 3;
-    div = "";
     $(document).ready(function() {
         $.ajax({
             url: "sql_server.php",
@@ -67,30 +64,35 @@ function conexion(query) {
             data: {server: server,
                 db: db,
                 user: user,
-                pass: pass,
-                query: query
+                pass: pass
             }
         }).done(function(response) {
             if (response == -1) {
-                alert("Error de conexion");
+                alert("Error de conexión");
             }
             else {
                 if (response == -2) {
                     alert("Error de consulta sql");
                 }
                 else {
-                    alert(response);
                     //Oculta ventana emergente
                     $(".ui-dialog-content").dialog("close");
                     $('#background').hide();
                     //Construir los Div para los n graficos
-                    for (index = 0; index < cantidad; ++index) {
-                        div += "<br><hr><br><center><h2>Gráfico Número" + index + " </h2></center>+<div id='graphic" + index + "'" + "+ class='graphic'></div>";
+                    if(response.length > 0)
+                       div =""; 
+                    for (index = 0; index < response.length; ++index) {
+                        if( index > 0 && (response[index-1].fg == response[index].fg)){
+                             div += "<br><div id='graphic" + index + "'" + "+ class='graphic'></div>";                
+                        }
+                        else{
+                             div +=  "<br><hr><br><center><h2>Gráfico para el FileGroup: "+ response[index].fg + "</h2></center><div id='graphic" + index + "'" + "+ class='graphic'></div>";  
+                        }                        
                     }
                     //Construir gráficos individualmente
                     $("#graphic_area").html(div);
-                    for (index = 0; index < cantidad; ++index) {
-                        drawChart(index);
+                    for (index = 0; index < response.length; ++index) {
+                        drawChart(index,response[index].use,response[index].file);
                     }
                 }
             }

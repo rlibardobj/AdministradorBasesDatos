@@ -46,7 +46,7 @@
             </nav>           
             <br><br><hr><br>
             <center>
-                <h1>Estadisticas de uso</h1>
+                <h1>Estadistícas de uso</h1>
             </center>
 
 
@@ -59,7 +59,7 @@
             </section>   
 
             <section id="dialog" class="dialog" title="Conectar a la Base de Datos">
-                <form class="form-1" method="post" action="javascript:conexion('select name from BD_InfoKB');" >
+                <form class="form-1" method="post" action="javascript:conexion();" >
                     <p class="field">
                         <input id="serverName" type="text" name="login" placeholder="Servidor">
                         <i class=""></i>
