@@ -5,19 +5,19 @@
         <title>SQL SERVER ADMIN</title>
         <meta charset="UTF-8" />      
         <link href='img/sql.png' rel='shortcut icon' type='image/png'>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="js/jquery.min.js"></script>
         <!-- CSS - JS -->
         <link rel="stylesheet" type="text/css" media="all" href="css/index.css" />               
         <script type="text/javascript" src="js/index.js"></script>     
         <!-- Login -->
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <link rel="stylesheet" href="css/jquery-ui.css" />
+        <script src="js/jquery-ui.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
         <link rel="shortcut icon" href="../favicon.ico"> 
         <link rel="stylesheet" type="text/css" href="css/style.css" />
         <script src="js/modernizr.custom.63321.js"></script>       
         <!--Graphic GOOGLE API-->
-        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="js/jsapi.js"></script>
         <script type="text/javascript">
             // Load the Visualization API and the piechart package.
             google.load('visualization', '1.0', {'packages': ['corechart']});
