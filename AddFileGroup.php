@@ -5,7 +5,7 @@ $database = $_POST['db'];
 $user = $_POST['user'];
 $pass = $_POST['pass'];
 $fileGroup = $_POST['fileGroup'];
-$query = "alter database $database add filegroup $fileGroup go";
+$query = "alter database $database add filegroup $fileGroup";
 $connectionInfo = array("Database" => $database, "UID" => $user, "PWD" => $pass);
 $conn = sqlsrv_connect($server, $connectionInfo);
 $return = "";
@@ -14,9 +14,9 @@ if (!$conn) {
 } else {
     $stmt = sqlsrv_query($conn, $query);
     if ($stmt === FALSE)
-        $return = -1;
+        $return = -2;
     else {
-        $return = "sucess";
+        $return = 5;
     }
 }
 echo $return;

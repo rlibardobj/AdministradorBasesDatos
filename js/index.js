@@ -39,7 +39,7 @@ $(function() {
             $('#background').hide();
         });
         $("#NewFileGroup").dialog({
-            height: 350,
+            height: 200,
             width: 400
         });
         $('#NewFileGroup').bind('dialogclose', function(event) {
@@ -116,39 +116,42 @@ function conexion(query) {
             }
         });
     });
+}
 
-    function AddFileGroup() {
-        var fileGroup = document.getElementById("FGName").value;
-        alert(fileGroup);
-        alert(server);
-        $(document).ready(function() {
-            $.ajax({
-                url: "AddFileGroup.php",
-                type: "post",
-                dataType: 'json',
-                data: {server: server,
-                    db: db,
-                    user: user,
-                    pass: pass,
-                    fileGroup: fileGroup
-                }
-            }).done(function(response) {
-                if (response == -1) {
-                    alert("Error de conexion");
+function AddFileGroup() {
+    var fileGroup = document.getElementById("FGName").value;
+       //     alert(fileGroup);
+    //alert(server);
+    $(document).ready(function() {
+        $.ajax({
+            url: "AddFileGroup.php",
+            type: "post",
+            //dataType: 'json',
+            data: {server: server,
+                db: db,
+                user: user,
+                pass: pass,
+                fileGroup: fileGroup
+            }
+        }).done(function(response) {
+            alert("hola");
+            if (response == -1) {
+                alert("Error de conexion");
+            }
+            else {
+                if (response == -2) {
+                    alert("Error de consulta sql");
                 }
                 else {
-                    if (response == -2) {
-                        alert("Error de consulta sql");
-                    }
-                    else {
-                        if (response == "success")
-                            alert("FileGroup añadido con éxito");
-                        else alert("Went Through php but nothing happened");
-                    }
+                    if (response == 5)
+                        alert("FileGroup añadido con éxito");
+                    else
+                        alert("Went Through php but nothing happened");
                 }
-            });
+            }
         });
-    }
+}
+);
 }
 
 
