@@ -87,6 +87,7 @@
                     <p class="field">
                         <input id="FGName" type="text" name="Name" placeholder="FileGroup">
                         <i class=""></i>
+                    </p>
                     <p class="submit">
                         <button type="submit" name="submit"><i class="icon-arrow-right icon-large"></i></button>
                     </p>
