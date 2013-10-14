@@ -126,7 +126,7 @@ function AddFileGroup() {
     //alert(server);
     $(document).ready(function() {
         $.ajax({
-            url: "AddFileGroup.php",
+            url: "php/AddFileGroup.php",
             type: "post",
             //dataType: 'json',
             data: {server: server,
