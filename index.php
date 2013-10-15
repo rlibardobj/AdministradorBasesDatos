@@ -39,8 +39,8 @@
             <hr>
             <nav>
                 <li><a href="#">Principal</a></li>
-                <li><a href="#">Crear Base de Datos</a></li>
-                <li><a id="AddFileGroup" href="#">Añadir FileGroup</a></li>
+                <li><a id="newDatabase" href="#">Crear Base de Datos</a></li>
+                <li><a id="addFileGroup" href="#">Añadir FileGroup</a></li>
                 <li><a href="#">Añadir Archivos a FG</a></li>
                 <li><a id="conexion" href="#">Conexión a BD</a></li>
             </nav>           
@@ -93,6 +93,27 @@
                     </p>
                 </form>
             </section>
+            
+            <section id="createDatabase" class="dialog" title="New Database">
+                <form id="databaseCreation" class="form-1" method="post" action="javascript:addField();" >
+                    <p class="field">
+                        <input id="databaseName" type="text" name="Name1" placeholder="Database">
+                        <i class=""></i>
+                    </p>
+                    <p class="field">
+                        <input id="administrator" type="text" name="Name2" placeholder="Database Administrator">
+                        <i class=""></i>
+                    </p>
+                    <p class="field">
+                        <input id="administratorPassword" type="text" name="Name3" placeholder="Password">
+                        <i class=""></i>
+                    </p>
+                    <p class="submit">
+                        <button type="submit" name="submit"><i class="icon-arrow-right icon-large"></i></button>
+                    </p>
+                </form>
+            </section>
+
 
         </div>
 

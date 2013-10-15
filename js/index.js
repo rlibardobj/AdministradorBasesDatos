@@ -7,6 +7,7 @@ var server;
 var db;
 var user;
 var pass;
+var fileGroups = 0;
 
 $(function() {
     $('#conexion').click(function() {
@@ -48,11 +49,31 @@ $(function() {
     });
 });
 
+$(function() {
+    $('#newDatabase').click(function() {
+        $('#background').animate({
+            'opacity': '.80'
+        });
+        $('#background').css('display', 'block');
+        $('#background').click(function() {
+            $(".ui-dialog-content").dialog("close");
+            $('#background').hide();
+        });
+        $("#createDatabase").dialog({
+            height: 350,
+            width: 400
+        });
+        $('#createDatabase').bind('dialogclose', function(event) {
+            $('#background').hide();
+        });
+    });
+});
+
 
 function drawChart(int, uso, archivo) {
     // Create the data table.
     var nombre = 'graphic' + int;
-    var sin_uso = 100- uso;
+    var sin_uso = 100 - uso;
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Topping');
     data.addColumn('number', 'Slices');
@@ -61,8 +82,8 @@ function drawChart(int, uso, archivo) {
         ['Espacio Usado', uso]
     ]);
     // Set chart options
-    var options = {'title': 'Porcentajes para el archivo: ' + archivo ,
-        is3D:true,
+    var options = {'title': 'Porcentajes para el archivo: ' + archivo,
+        is3D: true,
         'width': 500,
         'height': 400};
     // Instantiate and draw our chart, passing in some options.
@@ -99,20 +120,20 @@ function conexion() {
                     $(".ui-dialog-content").dialog("close");
                     $('#background').hide();
                     //Construir los Div para los n graficos
-                    if(response.length > 0)
-                       div =""; 
+                    if (response.length > 0)
+                        div = "";
                     for (index = 0; index < response.length; ++index) {
-                        if( index > 0 && (response[index-1].fg == response[index].fg)){
-                             div += "<br><div id='graphic" + index + "'" + "+ class='graphic'></div>";                
+                        if (index > 0 && (response[index - 1].fg == response[index].fg)) {
+                            div += "<br><div id='graphic" + index + "'" + "+ class='graphic'></div>";
                         }
-                        else{
-                             div +=  "<br><hr><br><center><h2>Gráfico para el FileGroup: "+ response[index].fg + "</h2></center><div id='graphic" + index + "'" + "+ class='graphic'></div>";  
-                        }                        
+                        else {
+                            div += "<br><hr><br><center><h2>Gráfico para el FileGroup: " + response[index].fg + "</h2></center><div id='graphic" + index + "'" + "+ class='graphic'></div>";
+                        }
                     }
                     //Construir gráficos individualmente
                     $("#graphic_area").html(div);
                     for (index = 0; index < response.length; ++index) {
-                        drawChart(index,response[index].use,response[index].file);
+                        drawChart(index, response[index].use, response[index].file);
                     }
                 }
             }
@@ -122,8 +143,6 @@ function conexion() {
 
 function AddFileGroup() {
     var fileGroup = document.getElementById("FGName").value;
-       //     alert(fileGroup);
-    //alert(server);
     $(document).ready(function() {
         $.ajax({
             url: "php/AddFileGroup.php",
@@ -152,9 +171,17 @@ function AddFileGroup() {
                 }
             }
         });
-}
-);
+    }
+    );
 }
 
+function addField() {
+        fileGroups++;
+        var container = document.getElementById("databaseCreation");
+        var input = document.createElement("input");
+        input.type = "text";
+        input.name = "filegroup" + fileGroups;
+        container.appendChild(input);
+}
 
 
