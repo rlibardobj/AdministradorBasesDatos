@@ -5,6 +5,7 @@ var server;
 var db;
 var user;
 var pass;
+var fileGroups = 0;
 
 /**
  * Accion para el evento del boton Conexión de bd.
@@ -49,6 +50,26 @@ $(function() {
             width: 400
         });
         $('#NewFileGroup').bind('dialogclose', function(event) {
+            $('#background').hide();
+        });
+    });
+});
+
+$(function() {
+    $('#newDatabase').click(function() {
+        $('#background').animate({
+            'opacity': '.80'
+        });
+        $('#background').css('display', 'block');
+        $('#background').click(function() {
+            $(".ui-dialog-content").dialog("close");
+            $('#background').hide();
+        });
+        $("#createDatabase").dialog({
+            height: 350,
+            width: 400
+        });
+        $('#createDatabase').bind('dialogclose', function(event) {
             $('#background').hide();
         });
     });
@@ -274,5 +295,13 @@ function anadirArchivo() {
     }
 }
 
+function addField() {
+        fileGroups++;
+        var container = document.getElementById("databaseCreation");
+        var input = document.createElement("input");
+        input.type = "text";
+        input.name = "filegroup" + fileGroups;
+        container.appendChild(input);
+}
 
 
