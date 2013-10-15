@@ -27,9 +27,12 @@
             // instantiates the pie chart, passes in the data and
             // draws it.
         </script>
+        <script>
+            $(function() {
+                $("#filegroup").buttonset();
+            });
+        </script>
     </head>
-
-
     <body>
 
         <div class="contenido">
@@ -38,15 +41,15 @@
             </header>
             <hr>
             <nav>
-                <li><a href="#">Principal</a></li>
-                <li><a href="#">Crear Base de Datos</a></li>
-                <li><a id="AddFileGroup" href="#">Añadir FileGroup</a></li>
-                <li><a href="#">Añadir Archivos a FG</a></li>
-                <li><a id="conexion" href="#">Conexión a BD</a></li>
+                <li><a onclick="crearGraficos()" >Principal</a></li>
+                <li><a onclick="crearBaseDatos()">Crear Base de Datos</a></li>
+                <li><a id="AddFileGroup" >Añadir FileGroup</a></li>
+                <li><a onclick="anadirArchivo()">Añadir Archivos a FG</a></li>
+                <li><a id="conexion">Conexión a BD</a></li>
             </nav>           
             <br><br><hr><br>
             <center>
-                <h1>Estadistícas de uso</h1>
+                <h1 id="titulo">Estadistícas de uso</h1>
             </center>
 
 
@@ -54,7 +57,7 @@
             <section id="graphic_area">
                 <center>
                     <br>
-                <h2 style="color: red">No se ha realizado la conexión</h2>                
+                    <h2 style="color: red">No se ha realizado la conexión</h2>                
                 </center>
             </section>   
 
@@ -81,7 +84,7 @@
                     </p>
                 </form>
             </section>
-            
+
             <section id="NewFileGroup" class="dialog" title="New Filegroup">
                 <form class="form-1" method="post" action="javascript:AddFileGroup();" >
                     <p class="field">
