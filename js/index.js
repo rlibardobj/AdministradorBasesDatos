@@ -76,6 +76,20 @@ $(function() {
 });
 
 
+/**
+ * Comprueba que los input solo acepten números
+ * @param {type} evt
+ * @returns {Boolean}
+ */
+function onlyNumbers(evt) {
+    var e = event || evt; // for trans-browser compatibility
+    var charCode = e.which || e.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+
+    return true;
+}
+
 
 /**
  * Método encargado de realizar un solo gráfico.
@@ -278,15 +292,15 @@ function anadirArchivo() {
                         }
                         div += "</table></center></form>";
                         //formulario almacenar datos del nuevo archivo
-                        div += "<br><br><center><h4>Complete los siguientes datos:</h4><center>"+
-                               "<form class='form-1' method='post' action='javascript:conexion();' >"+                                
-                               "<input id='nombreArchivo' type='text' name='newfile' placeholder='Nombre del archivo'>"+
-                               "<input id='tamañoInicial' type='text' name='newfile' placeholder='Tamaño inicial del archivo'>"+
-                               "<input id='tamañoMaximo' type='text' name='newfile' placeholder='Tamaño máximo del archivo'>"+
-                               "<input id='tamañoCrecimiento' type='text' name='newfile' placeholder='Tamaño crecimiento'>"+
-                               "</form></div>";
-                        
-                        
+                        div += "<br><br><center><h4>Complete los siguientes datos:</h4><center>" +
+                                "<form class='form-1' method='post' action='javascript:conexion();' >" +
+                                "<input id='nombreArchivo' type='text' name='newfile' placeholder='Nombre del archivo'>" +
+                                "<input id='tamañoInicial' type='text' name='newfile' onkeypress='return onlyNumbers();' placeholder='Tamaño inicial del archivo'>" +
+                                "<input id='tamañoMaximo' type='text' name='newfile' onkeypress='return onlyNumbers();' placeholder='Tamaño máximo del archivo'>" +
+                                "<input id='tamañoCrecimiento' type='text' name='newfile' onkeypress='return onlyNumbers();' placeholder='Tamaño crecimiento'>" +
+                                "</form></div>";
+
+
                         $("#titulo").html("Archivo a un FileGroup");
                         $("#graphic_area").html(div);
                     }
