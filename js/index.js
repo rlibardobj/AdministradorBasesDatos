@@ -76,6 +76,7 @@ $(function() {
 });
 
 
+
 /**
  * Método encargado de realizar un solo gráfico.
  * @param {type} int Número del elemento que desea graficar.
