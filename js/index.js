@@ -1,12 +1,10 @@
 document.write("<script language=\"JavaScript\" type=\"text/JavaScript\" src=\"https://www.google.com/jsapi\"></script" + ">");
-
 /*  Variables de Conexión  */
 var server;
 var db;
 var user;
 var pass;
 var fileGroups = 0;
-
 /**
  * Accion para el evento del boton Conexión de bd.
  * @returns {undefined}
@@ -30,7 +28,6 @@ $(function() {
         });
     });
 });
-
 /**
  * Acción para el vento del boton añadir Filegruop.
  * @returns {undefined}
@@ -86,7 +83,6 @@ function onlyNumbers(evt) {
     var charCode = e.which || e.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57))
         return false;
-
     return true;
 }
 
@@ -98,10 +94,8 @@ function onlyNumbers(evt) {
 function notspace(evt)
 {
     var e = evt || event;
-
-    if (e.keyCode == 32) 
-        return false; 
-
+    if (e.keyCode == 32)
+        return false;
 }
 
 
@@ -131,7 +125,6 @@ function drawChart(int, uso, archivo) {
     // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.PieChart(document.getElementById(nombre));
     chart.draw(data, options);
-
 }
 
 /**
@@ -315,8 +308,6 @@ function anadirArchivoGUI() {
                                 "<input id='tamañoCrecimiento' type='text' name='newfile' onkeypress='return onlyNumbers();' placeholder='Tamaño crecimiento en MB'>" +
                                 "<button type='submit' name='submit'>Crear archivo</button>" +
                                 "</form></div>";
-
-
                         $("#titulo").html("Archivo a un FileGroup");
                         $("#graphic_area").html(div);
                     }
@@ -360,7 +351,6 @@ function showNewDatabaseInterface() {
             + "</form>"
             + "</center>"
             + "</div>";
-
     $("#titulo").html("Nueva Base de Datos");
     $("#graphic_area").html(graphics);
 }
@@ -374,16 +364,61 @@ function anadirArchivo() {
     tamañoInicial = document.getElementById("tamañoInicial").value;
     tamañoMaximo = document.getElementById("tamañoMaximo").value;
     tamañoCrecimiento = document.getElementById("tamañoCrecimiento").value;
-    
-    if(nombreArchivo == "" || tamañoInicial == "" || tamañoMaximo == "" || tamañoCrecimiento == ""){
+    path = "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\\";
+    if (nombreArchivo == "" || tamañoInicial == "" || tamañoMaximo == "" || tamañoCrecimiento == "") {
         alert("Todos los datos son necesarios");
     }
-    else{
-        if(tamañoInicial == 0 || tamañoMaximo == 0 || tamañoCrecimiento == 0){
+    else {
+        if (tamañoInicial == 0 || tamañoMaximo == 0 || tamañoCrecimiento == 0) {
             alert("No pueden existir valores en cero")
+        }
+        else {
+            query = "USE master" +
+                    " GO" +
+                    " ALTER DATABASE " +
+                    db +
+                    " ADD FILE(" +
+                    " NAME=" + nombreArchivo + "," +
+                    " FILENAME=" + "'" + path + nombreArchivo + ".ndf'," +
+                    " SIZE=" + tamañoInicial + "MB," +
+                    " MAXSIZE=" + tamañoMaximo + "MB," +
+                    " FILEGROWTH=" + tamañoCrecimiento + "MB" +
+                    ") " +
+                    "TO FILEGROUP " + "";
+
+
+            $(document).ready(function() {
+                $.ajax({
+                    url: "php/AddFile.php",
+                    type: "post",
+                    data: {server: server,
+                        db: db,
+                        user: user,
+                        pass: pass,
+                        query: query
+                    }
+                }).done(function(response) {
+                    if (response == -1) {
+                        alert("Error de conexion");
+                    }
+                    else {
+                        if (response == -2) {
+                            alert("Ingrese el nombre del nuevo FileGroup");
+                        }
+                        else {
+                            if (response == 5)
+                                alert("FileGroup añadido con éxito");
+                            else
+                                alert("Error de conexión");
+                        }
+                    }
+                });
+            }
+            );
         }
     }
 }
+
 
 
 
