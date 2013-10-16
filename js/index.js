@@ -311,35 +311,54 @@ function anadirArchivo() {
 }
 
 function addFilegroupField() {
-        fileGroups++;
-        var container = document.getElementById("databaseCreation");
-        var input = document.createElement("input");
-        input.type = "text";
-        input.name = "filegroup" + fileGroups;
-        container.appendChild(input);
+    $('#filegroupsContainer').append(
+    "<br><div style=\"border: 1px solid\">"
+               + "<div id=\"filegroup"+ fileGroups +"\">"
+               + "<br>"
+               + "<input type\"text\" placeholder=\"Escriba el nombre del Filegroup\">"
+               + "<br>"
+               + "<input type=\"checkbox\">Generar archivos automaticamente"
+               + "<br>"
+               + "</div>"
+               + "<br>"
+               + "<div>"
+               + "<input id=\"submitAddFile\" type=\"button\" align\"right\" value=\"Añadir Archivo\" onclick=\"javascript:addFileField(filegroup"+fileGroups+")\">"
+               + "</div>"
+               + "<br>"
+               + "</div>");
+       fileGroups++;
 }
 
-function addFileField() {
-        fileGroups++;
-        var container = document.getElementById("databaseCreation");
-        var input = document.createElement("input");
-        input.type = "text";
-        input.name = "filegroup" + fileGroups;
-        container.appendChild(input);
+function addFileField(filegroup) {
+    $(filegroup).append("<input type=\"text\" placeholder=\"Nombre del Archivo\">"
+    + "<input type=\"text\" onkeypress=\"return onlyNumbers()\" placeholder=\"Tamaño Inicial\">"
+    + "<input type=\"text\" onkeypress=\"return onlyNumbers()\" placeholder=\"Tamaño Máximo\">"
+    + "<input type=\"text\" onkeypress=\"return onlyNumbers()\" placeholder=\"Tamaño de Crecimiento\"><br>");
 }
 
 function showNewDatabaseInterface() {
     graphics = "<br><hr><br><div id='contentFilegroup'>"
                + "<center><h4>Complete los datos para crear una nueva base de datos</h4></center>"
                + "<center>"
-               + "<form class=\"form-1\">"
+               + "<form>"
                + "<div id=\"databaseCreation\">"
-               + "<input id=\"databaseName\" type=\"text\" name=\"Name1\" placeholder=\"Base de Datos\">"
-               + "<input id=\"administrator\" type=\"text\" name=\"Name2\" placeholder=\"Usuario Administrador\">"
-               + "<input id=\"administratorPassword\" type=\"text\" name=\"Name3\" placeholder=\"Contraseña\">"
+               + "<input id=\"databaseName\" type=\"text\" placeholder=\"Base de Datos\">"
+               + "<input id=\"administrator\" type=\"text\" placeholder=\"Usuario Administrador\">"
+               + "<input id=\"administratorPassword\" type=\"text\" placeholder=\"Contraseña\">"
                + "</div>"
                + "<div>"
-               +     "<input id=\"submitCreateDatabae\" type=\"submit\" name=\"Name4\" value=\"Crear\">"
+               +             "<div id=\"filegroupsContainer\">"
+               +             "<br>"
+               +             "</div>"
+               +             "<br>"
+               +             "<br>"
+               +             "<div>"
+               +                 "<input id=\"submitNuevoFilegroup\" type=\"button\" value=\"Nuevo Filegroup\" onclick=\"javascript:addFilegroupField()\">"
+               +             "</div>"
+               + "</div>"
+               + "<br>"
+               + "<div>"
+               +     "<input id=\"submitCreateDatabae\" type=\"submit\" value=\"Crear Base de Datos\">"
                + "</div>"
                + "</form>"
                + "</center>"
