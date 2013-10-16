@@ -96,34 +96,6 @@
                     </p>
                 </form>
             </section>
-<<<<<<< HEAD
-=======
-            
-            <div id="createDatabase" class="dialog" title="New Database">
-                <form>
-                    <div id="databaseCreation">
-                        <p class="field">
-                            <input id="databaseName" type="text" name="Name1" onkeypress='return notspace();' placeholder="Base de Datos">
-                            <i class=""></i>
-                        </p>
-                        <p class="field">
-                            <input id="administrator" type="text" name="Name2" onkeypress='return notspace();' placeholder="Usuario Administrador">
-                            <i class=""></i>
-                        </p>
-                        <p class="field">
-                            <input id="administratorPassword" type="text" name="Name3" onkeypress='return notspace();' placeholder="Contraseña">
-                            <i class=""></i>
-                        </p>
-                    </div>
-                    <div>
-                        <input id="submitCreateDatabae" type="submit" name="Name4" onkeypress='return notspace();' value="Crear">
-                        <i class=""></i>
-                    </div>
-                </form>
-            </div>
->>>>>>> 76ffc14c290588eb28bf8abc51bb40bac2207a21
-
-
         </div>
 
     </body>
