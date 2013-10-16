@@ -234,6 +234,7 @@ function crearBaseDatos() {
         alert("No existe una conexión")
     }
     else {
+        div = 0;
         var div = "";
         $("#graphic_area").html(div);
     }
@@ -295,7 +296,16 @@ function anadirArchivo() {
     }
 }
 
-function addField() {
+function addFilegroupField() {
+        fileGroups++;
+        var container = document.getElementById("databaseCreation");
+        var input = document.createElement("input");
+        input.type = "text";
+        input.name = "filegroup" + fileGroups;
+        container.appendChild(input);
+}
+
+function addFileField() {
         fileGroups++;
         var container = document.getElementById("databaseCreation");
         var input = document.createElement("input");
