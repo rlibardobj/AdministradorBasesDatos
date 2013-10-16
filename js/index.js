@@ -1,12 +1,10 @@
 document.write("<script language=\"JavaScript\" type=\"text/JavaScript\" src=\"https://www.google.com/jsapi\"></script" + ">");
-
 /*  Variables de Conexión  */
 var server;
 var db;
 var user;
 var pass;
 var fileGroups = 0;
-
 /**
  * Accion para el evento del boton Conexión de bd.
  * @returns {undefined}
@@ -30,7 +28,6 @@ $(function() {
         });
     });
 });
-
 /**
  * Acción para el vento del boton añadir Filegruop.
  * @returns {undefined}
@@ -55,25 +52,25 @@ $(function() {
     });
 });
 /*
-$(function() {
-    $('#newDatabase').click(function() {
-        $('#background').animate({
-            'opacity': '.80'
-        });
-        $('#background').css('display', 'block');
-        $('#background').click(function() {
-            $(".ui-dialog-content").dialog("close");
-            $('#background').hide();
-        });
-        $("#createDatabase").dialog({
-            height: 350,
-            width: 400
-        });
-        $('#createDatabase').bind('dialogclose', function(event) {
-            $('#background').hide();
-        });
-    });
-});*/
+ $(function() {
+ $('#newDatabase').click(function() {
+ $('#background').animate({
+ 'opacity': '.80'
+ });
+ $('#background').css('display', 'block');
+ $('#background').click(function() {
+ $(".ui-dialog-content").dialog("close");
+ $('#background').hide();
+ });
+ $("#createDatabase").dialog({
+ height: 350,
+ width: 400
+ });
+ $('#createDatabase').bind('dialogclose', function(event) {
+ $('#background').hide();
+ });
+ });
+ });*/
 
 
 /**
@@ -86,8 +83,19 @@ function onlyNumbers(evt) {
     var charCode = e.which || e.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57))
         return false;
-
     return true;
+}
+
+/**
+ * Comprueba que no existan espacios en blanco
+ * @param {type} e eventp
+ * @returns {Boolean}
+ */
+function notspace(evt)
+{
+    var e = evt || event;
+    if (e.keyCode == 32)
+        return false;
 }
 
 
@@ -117,7 +125,6 @@ function drawChart(int, uso, archivo) {
     // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.PieChart(document.getElementById(nombre));
     chart.draw(data, options);
-
 }
 
 /**
@@ -245,7 +252,7 @@ function AddFileGroup() {
  */
 function crearBaseDatos() {
     if (server == null | db == null | user == null | password == null) {
-        alert("No existe una conexión")
+        alert("No existe una conexión");
     }
     else {
         div = 0;
@@ -254,12 +261,13 @@ function crearBaseDatos() {
     }
 }
 
+
 /**
  * Realiza la interfaz de acuerdo a los datos almacenados en la base de datos
  * para añadir archivos a un filegroup
  * @returns {undefined}
  */
-function anadirArchivo() {
+function anadirArchivoGUI() {
     if (server == null | db == null | user == null | password == null) {
         alert("No existe una conexión")
     }
@@ -293,14 +301,13 @@ function anadirArchivo() {
                         div += "</table></center></form>";
                         //formulario almacenar datos del nuevo archivo
                         div += "<br><br><center><h4>Complete los siguientes datos:</h4><center>" +
-                                "<form class='form-1' method='post' action='javascript:conexion();' >" +
-                                "<input id='nombreArchivo' type='text' name='newfile' placeholder='Nombre del archivo'>" +
-                                "<input id='tamañoInicial' type='text' name='newfile' onkeypress='return onlyNumbers();' placeholder='Tamaño inicial del archivo'>" +
-                                "<input id='tamañoMaximo' type='text' name='newfile' onkeypress='return onlyNumbers();' placeholder='Tamaño máximo del archivo'>" +
-                                "<input id='tamañoCrecimiento' type='text' name='newfile' onkeypress='return onlyNumbers();' placeholder='Tamaño crecimiento'>" +
+                                "<form class='form-1' method='post' action='javascript:anadirArchivo();' >" +
+                                "<input id='nombreArchivo' type='text' name='newfile'  onkeypress='return notspace();' placeholder='Nombre del archivo'>" +
+                                "<input id='tamañoInicial' type='text' name='newfile' onkeypress='return onlyNumbers();' placeholder='Tamaño inicial del archivo en MB'>" +
+                                "<input id='tamañoMaximo' type='text' name='newfile' onkeypress='return onlyNumbers();' placeholder='Tamaño máximo del archivo en MB'>" +
+                                "<input id='tamañoCrecimiento' type='text' name='newfile' onkeypress='return onlyNumbers();' placeholder='Tamaño crecimiento en MB'>" +
+                                "<button type='submit' name='submit'>Crear archivo</button>" +
                                 "</form></div>";
-
-
                         $("#titulo").html("Archivo a un FileGroup");
                         $("#graphic_area").html(div);
                     }
@@ -367,5 +374,72 @@ function showNewDatabaseInterface() {
       $("#titulo").html("Nueva Base de Datos");
       $("#graphic_area").html(graphics);
 }
+
+/**
+ * Realiza la creación del archivo de acuerdo a los datos del form
+ * @returns {undefined}
+ */
+function anadirArchivo() {
+    nombreArchivo = document.getElementById("nombreArchivo").value;
+    tamañoInicial = document.getElementById("tamañoInicial").value;
+    tamañoMaximo = document.getElementById("tamañoMaximo").value;
+    tamañoCrecimiento = document.getElementById("tamañoCrecimiento").value;
+    path = "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\\";
+    if (nombreArchivo == "" || tamañoInicial == "" || tamañoMaximo == "" || tamañoCrecimiento == "") {
+        alert("Todos los datos son necesarios");
+    }
+    else {
+        if (tamañoInicial == 0 || tamañoMaximo == 0 || tamañoCrecimiento == 0) {
+            alert("No pueden existir valores en cero")
+        }
+        else {
+            query = "USE master" +
+                    " GO" +
+                    " ALTER DATABASE " +
+                    db +
+                    " ADD FILE(" +
+                    " NAME=" + nombreArchivo + "," +
+                    " FILENAME=" + "'" + path + nombreArchivo + ".ndf'," +
+                    " SIZE=" + tamañoInicial + "MB," +
+                    " MAXSIZE=" + tamañoMaximo + "MB," +
+                    " FILEGROWTH=" + tamañoCrecimiento + "MB" +
+                    ") " +
+                    "TO FILEGROUP " + "";
+
+
+            $(document).ready(function() {
+                $.ajax({
+                    url: "php/AddFile.php",
+                    type: "post",
+                    data: {server: server,
+                        db: db,
+                        user: user,
+                        pass: pass,
+                        query: query
+                    }
+                }).done(function(response) {
+                    if (response == -1) {
+                        alert("Error de conexion");
+                    }
+                    else {
+                        if (response == -2) {
+                            alert("Ingrese el nombre del nuevo FileGroup");
+                        }
+                        else {
+                            if (response == 5)
+                                alert("FileGroup añadido con éxito");
+                            else
+                                alert("Error de conexión");
+                        }
+                    }
+                });
+            }
+            );
+        }
+    }
+}
+
+
+
 
 

@@ -44,7 +44,7 @@
                 <li><a onclick="crearGraficos()" >Principal</a></li>
                 <li><a onclick="showNewDatabaseInterface()">Crear Base de Datos</a></li>
                 <li><a id="AddFileGroup" >Añadir FileGroup</a></li>
-                <li><a onclick="anadirArchivo()">Añadir Archivos a FG</a></li>
+                <li><a onclick="anadirArchivoGUI()">Añadir Archivos a FG</a></li>
                 <li><a id="conexion">Conexión a BD</a></li>
             </nav>           
             <br><br><hr><br>
@@ -64,19 +64,19 @@
             <section id="dialog" class="dialog" title="Conectar a la Base de Datos">
                 <form class="form-1" method="post" action="javascript:conexion();" >
                     <p class="field">
-                        <input id="serverName" type="text" name="login" placeholder="Servidor">
+                        <input id="serverName" type="text" name="login" onkeypress='return notspace();' placeholder="Servidor">
                         <i class=""></i>
                     </p>
                     <p class="field">
-                        <input id="dataBase" type="text" name="password" placeholder="Base Datos">
+                        <input id="dataBase" type="text" name="password" onkeypress='return notspace();' placeholder="Base Datos">
                         <i class=""></i>
                     </p>
                     <p class="field">
-                        <input id="userName" type="text" name="login" placeholder="Usuario">
+                        <input id="userName" type="text" name="login" onkeypress='return notspace();' placeholder="Usuario">
                         <i class="icon-user icon-large"></i>
                     </p>
                     <p class="field">
-                        <input id="password" type="password" name="password" placeholder="Contraseña">
+                        <input id="password" type="password" name="password" onkeypress='return notspace();'  placeholder="Contraseña">
                         <i class="icon-lock icon-large"></i>
                     </p>
                     <p class="submit">
@@ -88,7 +88,7 @@
             <section id="NewFileGroup" class="dialog" title="New Filegroup">
                 <form class="form-1" method="post" action="javascript:AddFileGroup();" >
                     <p class="field">
-                        <input id="FGName" type="text" name="Name" placeholder="FileGroup">
+                        <input id="FGName" type="text" name="Name" onkeypress='return notspace();' placeholder="FileGroup">
                         <i class=""></i>
                     </p>
                     <p class="submit">
@@ -96,6 +96,32 @@
                     </p>
                 </form>
             </section>
+<<<<<<< HEAD
+=======
+            
+            <div id="createDatabase" class="dialog" title="New Database">
+                <form>
+                    <div id="databaseCreation">
+                        <p class="field">
+                            <input id="databaseName" type="text" name="Name1" onkeypress='return notspace();' placeholder="Base de Datos">
+                            <i class=""></i>
+                        </p>
+                        <p class="field">
+                            <input id="administrator" type="text" name="Name2" onkeypress='return notspace();' placeholder="Usuario Administrador">
+                            <i class=""></i>
+                        </p>
+                        <p class="field">
+                            <input id="administratorPassword" type="text" name="Name3" onkeypress='return notspace();' placeholder="Contraseña">
+                            <i class=""></i>
+                        </p>
+                    </div>
+                    <div>
+                        <input id="submitCreateDatabae" type="submit" name="Name4" onkeypress='return notspace();' value="Crear">
+                        <i class=""></i>
+                    </div>
+                </form>
+            </div>
+>>>>>>> 76ffc14c290588eb28bf8abc51bb40bac2207a21
 
 
         </div>
