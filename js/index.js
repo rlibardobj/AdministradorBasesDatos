@@ -318,6 +318,7 @@ function anadirArchivoGUI() {
 }
 
 function addFilegroupField() {
+
     $('#filegroupsContainer').append(
     "<br><div style=\"border: 1px solid\">"
                + "<div id=\"filegroup"+ fileGroups +"\">"
@@ -341,11 +342,11 @@ function addFileField(filegroup) {
     + "<input type=\"text\" onkeypress=\"return onlyNumbers()\" placeholder=\"Tamaño Inicial\">"
     + "<input type=\"text\" onkeypress=\"return onlyNumbers()\" placeholder=\"Tamaño Máximo\">"
     + "<input type=\"text\" onkeypress=\"return onlyNumbers()\" placeholder=\"Tamaño de Crecimiento\"><br>");
+
 }
 
 function showNewDatabaseInterface() {
     graphics = "<br><hr><br><div id='contentFilegroup'>"
-<<<<<<< HEAD
                + "<center><h4>Complete los datos para crear una nueva base de datos</h4></center>"
                + "<center>"
                + "<form>"
@@ -374,6 +375,7 @@ function showNewDatabaseInterface() {
       
       $("#titulo").html("Nueva Base de Datos");
       $("#graphic_area").html(graphics);
+
 }
 
 /**
@@ -439,6 +441,9 @@ function anadirArchivo() {
         }
     }
 }
+
+
+
 
 
 
