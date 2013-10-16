@@ -42,7 +42,7 @@
             <hr>
             <nav>
                 <li><a onclick="crearGraficos()" >Principal</a></li>
-                <li><a onclick="crearBaseDatos()">Crear Base de Datos</a></li>
+                <li><a onclick="showNewDatabaseInterface()">Crear Base de Datos</a></li>
                 <li><a id="AddFileGroup" >Añadir FileGroup</a></li>
                 <li><a onclick="anadirArchivo()">Añadir Archivos a FG</a></li>
                 <li><a id="conexion">Conexión a BD</a></li>
@@ -97,25 +97,28 @@
                 </form>
             </section>
             
-            <section id="createDatabase" class="dialog" title="New Database">
-                <form id="databaseCreation" class="form-1" method="post" action="javascript:addField();" >
-                    <p class="field">
-                        <input id="databaseName" type="text" name="Name1" placeholder="Database">
+            <div id="createDatabase" class="dialog" title="New Database">
+                <form>
+                    <div id="databaseCreation">
+                        <p class="field">
+                            <input id="databaseName" type="text" name="Name1" placeholder="Base de Datos">
+                            <i class=""></i>
+                        </p>
+                        <p class="field">
+                            <input id="administrator" type="text" name="Name2" placeholder="Usuario Administrador">
+                            <i class=""></i>
+                        </p>
+                        <p class="field">
+                            <input id="administratorPassword" type="text" name="Name3" placeholder="Contraseña">
+                            <i class=""></i>
+                        </p>
+                    </div>
+                    <div>
+                        <input id="submitCreateDatabae" type="submit" name="Name4" value="Crear">
                         <i class=""></i>
-                    </p>
-                    <p class="field">
-                        <input id="administrator" type="text" name="Name2" placeholder="Database Administrator">
-                        <i class=""></i>
-                    </p>
-                    <p class="field">
-                        <input id="administratorPassword" type="text" name="Name3" placeholder="Password">
-                        <i class=""></i>
-                    </p>
-                    <p class="submit">
-                        <button type="submit" name="submit"><i class="icon-arrow-right icon-large"></i></button>
-                    </p>
+                    </div>
                 </form>
-            </section>
+            </div>
 
 
         </div>

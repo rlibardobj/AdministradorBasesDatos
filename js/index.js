@@ -54,7 +54,7 @@ $(function() {
         });
     });
 });
-
+/*
 $(function() {
     $('#newDatabase').click(function() {
         $('#background').animate({
@@ -73,7 +73,7 @@ $(function() {
             $('#background').hide();
         });
     });
-});
+});*/
 
 
 
@@ -312,6 +312,27 @@ function addFileField() {
         input.type = "text";
         input.name = "filegroup" + fileGroups;
         container.appendChild(input);
+}
+
+function showNewDatabaseInterface() {
+    graphics = "<br><hr><br><div id='contentFilegroup'>"
+               + "<center><h4>Complete los datos para crear una nueva base de datos</h4></center>"
+               + "<center>"
+               + "<form class=\"form-1\">"
+               + "<div id=\"databaseCreation\">"
+               + "<input id=\"databaseName\" type=\"text\" name=\"Name1\" placeholder=\"Base de Datos\">"
+               + "<input id=\"administrator\" type=\"text\" name=\"Name2\" placeholder=\"Usuario Administrador\">"
+               + "<input id=\"administratorPassword\" type=\"text\" name=\"Name3\" placeholder=\"Contraseña\">"
+               + "</div>"
+               + "<div>"
+               +     "<input id=\"submitCreateDatabae\" type=\"submit\" name=\"Name4\" value=\"Crear\">"
+               + "</div>"
+               + "</form>"
+               + "</center>"
+              + "</div>";
+      
+      $("#titulo").html("Nueva Base de Datos");
+      $("#graphic_area").html(graphics);
 }
 
 
