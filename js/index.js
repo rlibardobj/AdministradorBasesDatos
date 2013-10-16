@@ -55,25 +55,25 @@ $(function() {
     });
 });
 /*
-$(function() {
-    $('#newDatabase').click(function() {
-        $('#background').animate({
-            'opacity': '.80'
-        });
-        $('#background').css('display', 'block');
-        $('#background').click(function() {
-            $(".ui-dialog-content").dialog("close");
-            $('#background').hide();
-        });
-        $("#createDatabase").dialog({
-            height: 350,
-            width: 400
-        });
-        $('#createDatabase').bind('dialogclose', function(event) {
-            $('#background').hide();
-        });
-    });
-});*/
+ $(function() {
+ $('#newDatabase').click(function() {
+ $('#background').animate({
+ 'opacity': '.80'
+ });
+ $('#background').css('display', 'block');
+ $('#background').click(function() {
+ $(".ui-dialog-content").dialog("close");
+ $('#background').hide();
+ });
+ $("#createDatabase").dialog({
+ height: 350,
+ width: 400
+ });
+ $('#createDatabase').bind('dialogclose', function(event) {
+ $('#background').hide();
+ });
+ });
+ });*/
 
 
 /**
@@ -88,6 +88,20 @@ function onlyNumbers(evt) {
         return false;
 
     return true;
+}
+
+/**
+ * Comprueba que no existan espacios en blanco
+ * @param {type} e eventp
+ * @returns {Boolean}
+ */
+function notspace(evt)
+{
+    var e = evt || event;
+
+    if (e.keyCode == 32) 
+        return false; 
+
 }
 
 
@@ -245,7 +259,7 @@ function AddFileGroup() {
  */
 function crearBaseDatos() {
     if (server == null | db == null | user == null | password == null) {
-        alert("No existe una conexión")
+        alert("No existe una conexión");
     }
     else {
         div = 0;
@@ -254,12 +268,13 @@ function crearBaseDatos() {
     }
 }
 
+
 /**
  * Realiza la interfaz de acuerdo a los datos almacenados en la base de datos
  * para añadir archivos a un filegroup
  * @returns {undefined}
  */
-function anadirArchivo() {
+function anadirArchivoGUI() {
     if (server == null | db == null | user == null | password == null) {
         alert("No existe una conexión")
     }
@@ -293,11 +308,12 @@ function anadirArchivo() {
                         div += "</table></center></form>";
                         //formulario almacenar datos del nuevo archivo
                         div += "<br><br><center><h4>Complete los siguientes datos:</h4><center>" +
-                                "<form class='form-1' method='post' action='javascript:conexion();' >" +
-                                "<input id='nombreArchivo' type='text' name='newfile' placeholder='Nombre del archivo'>" +
-                                "<input id='tamañoInicial' type='text' name='newfile' onkeypress='return onlyNumbers();' placeholder='Tamaño inicial del archivo'>" +
-                                "<input id='tamañoMaximo' type='text' name='newfile' onkeypress='return onlyNumbers();' placeholder='Tamaño máximo del archivo'>" +
-                                "<input id='tamañoCrecimiento' type='text' name='newfile' onkeypress='return onlyNumbers();' placeholder='Tamaño crecimiento'>" +
+                                "<form class='form-1' method='post' action='javascript:anadirArchivo();' >" +
+                                "<input id='nombreArchivo' type='text' name='newfile'  onkeypress='return notspace();' placeholder='Nombre del archivo'>" +
+                                "<input id='tamañoInicial' type='text' name='newfile' onkeypress='return onlyNumbers();' placeholder='Tamaño inicial del archivo en MB'>" +
+                                "<input id='tamañoMaximo' type='text' name='newfile' onkeypress='return onlyNumbers();' placeholder='Tamaño máximo del archivo en MB'>" +
+                                "<input id='tamañoCrecimiento' type='text' name='newfile' onkeypress='return onlyNumbers();' placeholder='Tamaño crecimiento en MB'>" +
+                                "<button type='submit' name='submit'>Crear archivo</button>" +
                                 "</form></div>";
 
 
@@ -311,42 +327,64 @@ function anadirArchivo() {
 }
 
 function addFilegroupField() {
-        fileGroups++;
-        var container = document.getElementById("databaseCreation");
-        var input = document.createElement("input");
-        input.type = "text";
-        input.name = "filegroup" + fileGroups;
-        container.appendChild(input);
+    fileGroups++;
+    var container = document.getElementById("databaseCreation");
+    var input = document.createElement("input");
+    input.type = "text";
+    input.name = "filegroup" + fileGroups;
+    container.appendChild(input);
 }
 
 function addFileField() {
-        fileGroups++;
-        var container = document.getElementById("databaseCreation");
-        var input = document.createElement("input");
-        input.type = "text";
-        input.name = "filegroup" + fileGroups;
-        container.appendChild(input);
+    fileGroups++;
+    var container = document.getElementById("databaseCreation");
+    var input = document.createElement("input");
+    input.type = "text";
+    input.name = "filegroup" + fileGroups;
+    container.appendChild(input);
 }
 
 function showNewDatabaseInterface() {
     graphics = "<br><hr><br><div id='contentFilegroup'>"
-               + "<center><h4>Complete los datos para crear una nueva base de datos</h4></center>"
-               + "<center>"
-               + "<form class=\"form-1\">"
-               + "<div id=\"databaseCreation\">"
-               + "<input id=\"databaseName\" type=\"text\" name=\"Name1\" placeholder=\"Base de Datos\">"
-               + "<input id=\"administrator\" type=\"text\" name=\"Name2\" placeholder=\"Usuario Administrador\">"
-               + "<input id=\"administratorPassword\" type=\"text\" name=\"Name3\" placeholder=\"Contraseña\">"
-               + "</div>"
-               + "<div>"
-               +     "<input id=\"submitCreateDatabae\" type=\"submit\" name=\"Name4\" value=\"Crear\">"
-               + "</div>"
-               + "</form>"
-               + "</center>"
-              + "</div>";
-      
-      $("#titulo").html("Nueva Base de Datos");
-      $("#graphic_area").html(graphics);
+            + "<center><h4>Complete los datos para crear una nueva base de datos</h4></center>"
+            + "<center>"
+            + "<form class=\"form-1\">"
+            + "<div id=\"databaseCreation\">"
+            + "<input id=\"databaseName\" type=\"text\" name=\"Name1\" placeholder=\"Base de Datos\">"
+            + "<input id=\"administrator\" type=\"text\" name=\"Name2\" placeholder=\"Usuario Administrador\">"
+            + "<input id=\"administratorPassword\" type=\"text\" name=\"Name3\" placeholder=\"Contraseña\">"
+            + "</div>"
+            + "<div>"
+            + "<input id=\"submitCreateDatabae\" type=\"submit\" name=\"Name4\" value=\"Crear\">"
+            + "</div>"
+            + "</form>"
+            + "</center>"
+            + "</div>";
+
+    $("#titulo").html("Nueva Base de Datos");
+    $("#graphic_area").html(graphics);
 }
+
+/**
+ * Realiza la creación del archivo de acuerdo a los datos del form
+ * @returns {undefined}
+ */
+function anadirArchivo() {
+    nombreArchivo = document.getElementById("nombreArchivo").value;
+    tamañoInicial = document.getElementById("tamañoInicial").value;
+    tamañoMaximo = document.getElementById("tamañoMaximo").value;
+    tamañoCrecimiento = document.getElementById("tamañoCrecimiento").value;
+    
+    if(nombreArchivo == "" || tamañoInicial == "" || tamañoMaximo == "" || tamañoCrecimiento == ""){
+        alert("Todos los datos son necesarios");
+    }
+    else{
+        if(tamañoInicial == 0 || tamañoMaximo == 0 || tamañoCrecimiento == 0){
+            alert("No pueden existir valores en cero")
+        }
+    }
+}
+
+
 
 
