@@ -345,6 +345,7 @@ function addFileField(filegroup) {
 
 function showNewDatabaseInterface() {
     graphics = "<br><hr><br><div id='contentFilegroup'>"
+<<<<<<< HEAD
                + "<center><h4>Complete los datos para crear una nueva base de datos</h4></center>"
                + "<center>"
                + "<form>"
@@ -438,6 +439,9 @@ function anadirArchivo() {
         }
     }
 }
+
+
+
 
 
 
