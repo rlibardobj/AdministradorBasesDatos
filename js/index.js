@@ -74,17 +74,6 @@ $(function() {
         });
     });
 });
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 357f89e4291341c0ae5d8974799685953d288098
-
-=======
-
-
->>>>>>> 357f89e4291341c0ae5d8974799685953d288098
 /**
  * Método encargado de realizar un solo gráfico.
  * @param {type} int Número del elemento que desea graficar.
@@ -230,14 +219,7 @@ function AddFileGroup() {
         });
     }
     );
-<<<<<<< HEAD
-<<<<<<< HEAD
 }
-
-=======
-}
-
-
 /**
  * Valida los valores del formulario para realizar la conexión
  * @returns {undefined} 
@@ -247,80 +229,6 @@ function crearBaseDatos() {
         alert("No existe una conexión")
     }
     else {
-        var div = "";
-        $("#graphic_area").html(div);
-    }
-}
-
-/**
- * Realiza la interfaz de acuerdo a los datos almacenados en la base de datos
- * para añadir archivos a un filegroup
- * @returns {undefined}
- */
-function anadirArchivo() {
-=======
-}
-
-
-/**
- * Valida los valores del formulario para realizar la conexión
- * @returns {undefined} 
- */
-function crearBaseDatos() {
->>>>>>> 357f89e4291341c0ae5d8974799685953d288098
-    if (server == null | db == null | user == null | password == null) {
-        alert("No existe una conexión")
-    }
-    else {
-<<<<<<< HEAD
-        $(document).ready(function() {
-            $.ajax({
-                url: "php/getFileGroups.php",
-                type: "post",
-                dataType: 'json',
-                data: {server: server,
-                    db: db,
-                    user: user,
-                    pass: pass
-                }
-            }).done(function(response) {
-                if (response == -1) {
-                    alert("Error de conexión");
-                }
-                else {
-                    if (response == -2) {
-                        alert("Error de consulta sql");
-                    }
-                    else {
-                        //Construir los filegroup
-                        if (response.length > 0)
-                            div = "<br><hr><br><div id='contentFilegroup'><form><center><h4>Seleccione el Filegroup que desea crear un archivo: </h4></center><center><table><br>";
-                        for (index = 0; index < response.length; ++index) {
-                            div += "<tr><td><input type='radio' name='fg' value='male" + response[index].name + "'>" +
-                                    response[index].id + " " + response[index].name + "</td></tr>";
-                        }
-                        div += "</table></center></form>";
-                        //formulario almacenar datos del nuevo archivo
-                        div += "<br><br><center><h4>Complete los siguientes datos:</h4><center>"+
-                               "<form class='form-1' method='post' action='javascript:conexion();' >"+                                
-                               "<input id='nombreArchivo' type='text' name='newfile' placeholder='Nombre del archivo'>"+
-                               "<input id='tamañoInicial' type='text' name='newfile' placeholder='Tamaño inicial del archivo'>"+
-                               "<input id='tamañoMaximo' type='text' name='newfile' placeholder='Tamaño máximo del archivo'>"+
-                               "<input id='tamañoCrecimiento' type='text' name='newfile' placeholder='Tamaño crecimiento'>"+
-                               "</form></div>";
-                        
-                        
-                        $("#titulo").html("Archivo a un FileGroup");
-                        $("#graphic_area").html(div);
-                    }
-                }
-            });
-        });
-    }
-}
-
->>>>>>> 357f89e4291341c0ae5d8974799685953d288098
-=======
         var div = "";
         $("#graphic_area").html(div);
     }
@@ -382,7 +290,6 @@ function anadirArchivo() {
     }
 }
 
->>>>>>> 357f89e4291341c0ae5d8974799685953d288098
 function addField() {
         fileGroups++;
         var container = document.getElementById("databaseCreation");

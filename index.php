@@ -41,25 +41,11 @@
             </header>
             <hr>
             <nav>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <li><a href="#">Principal</a></li>
-                <li><a id="newDatabase" href="#">Crear Base de Datos</a></li>
-                <li><a id="addFileGroup" href="#">Añadir FileGroup</a></li>
-                <li><a href="#">Añadir Archivos a FG</a></li>
-                <li><a id="conexion" href="#">Conexión a BD</a></li>
-=======
-=======
->>>>>>> 357f89e4291341c0ae5d8974799685953d288098
                 <li><a onclick="crearGraficos()" >Principal</a></li>
                 <li><a onclick="crearBaseDatos()">Crear Base de Datos</a></li>
                 <li><a id="AddFileGroup" >Añadir FileGroup</a></li>
                 <li><a onclick="anadirArchivo()">Añadir Archivos a FG</a></li>
                 <li><a id="conexion">Conexión a BD</a></li>
-<<<<<<< HEAD
->>>>>>> 357f89e4291341c0ae5d8974799685953d288098
-=======
->>>>>>> 357f89e4291341c0ae5d8974799685953d288098
             </nav>           
             <br><br><hr><br>
             <center>
