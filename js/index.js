@@ -74,6 +74,7 @@ $(function() {
         });
     });
 });
+
 /**
  * Método encargado de realizar un solo gráfico.
  * @param {type} int Número del elemento que desea graficar.
@@ -220,6 +221,7 @@ function AddFileGroup() {
     }
     );
 }
+
 /**
  * Valida los valores del formulario para realizar la conexión
  * @returns {undefined} 
@@ -289,7 +291,6 @@ function anadirArchivo() {
         });
     }
 }
-
 function addField() {
         fileGroups++;
         var container = document.getElementById("databaseCreation");
