@@ -36,25 +36,25 @@ $(function() {
  */
 $(function() {
     $('#AddFileGroup').click(function() {
-        if(server == null || db == null || user == null || pass == null){
+        if (server == null || db == null || user == null || pass == null) {
             alert("No existe una conexión");
         }
-        else{
-        $('#background').animate({
-            'opacity': '.80'
-        });
-        $('#background').css('display', 'block');
-        $('#background').click(function() {
-            $(".ui-dialog-content").dialog("close");
-            $('#background').hide();
-        });
-        $("#NewFileGroup").dialog({
-            height: 200,
-            width: 400
-        });
-        $('#NewFileGroup').bind('dialogclose', function(event) {
-            $('#background').hide();
-        });
+        else {
+            $('#background').animate({
+                'opacity': '.80'
+            });
+            $('#background').css('display', 'block');
+            $('#background').click(function() {
+                $(".ui-dialog-content").dialog("close");
+                $('#background').hide();
+            });
+            $("#NewFileGroup").dialog({
+                height: 200,
+                width: 400
+            });
+            $('#NewFileGroup').bind('dialogclose', function(event) {
+                $('#background').hide();
+            });
         }
     });
 });
@@ -337,9 +337,9 @@ function addFilegroupField() {
  */
 function addFileField(filegroup) {
     $(filegroup).append("<input type=\"text\" placeholder=\"Nombre del Archivo\" onkeypress='return notspace();'>"
-            + "<input type=\"text\" onkeypress=\"return onlyNumbers()\" placeholder=\"Tamaño Inicial\" >"
-            + "<input type=\"text\" onkeypress=\"return onlyNumbers()\" placeholder=\"Tamaño Máximo\">"
-            + "<input type=\"text\" onkeypress=\"return onlyNumbers()\" placeholder=\"Tamaño de Crecimiento\"><br>");
+            + "<input type=\"text\" onkeypress=\"return onlyNumbers()\" placeholder=\"Tamaño Inicial(MB)\" >"
+            + "<input type=\"text\" onkeypress=\"return onlyNumbers()\" placeholder=\"Tamaño Máximo(MB)\">"
+            + "<input type=\"text\" onkeypress=\"return onlyNumbers()\" placeholder=\"Tamaño de Crecimiento(MB)\"><br>");
 }
 
 /**
@@ -350,7 +350,7 @@ function showNewDatabaseInterface() {
     graphics = "<br><hr><br><div id='contentFilegroup'>"
             + "<center><h4>Complete los datos para crear una nueva base de datos</h4></center>"
             + "<center>"
-            + "<form>"
+            + "<form action=\"javascript:addDatabase()\">"
             + "<div id=\"databaseCreation\">"
             + "<input id=\"databaseName\" type=\"text\" placeholder=\"Base de Datos\" onkeypress='return notspace();'>"
             + "<input id=\"administrator\" type=\"text\" placeholder=\"Usuario Administrador\" onkeypress='return notspace();'>"
@@ -401,7 +401,7 @@ function anadirArchivo() {
                 alert("Debe seleccionar un FileGroup donde desea crear el archivo");
             }
             else {
-                query = queryAddFile(nombreArchivo,tamañoInicial,tamañoMaximo,tamañoCrecimiento,FGselected);
+                query = queryAddFile(nombreArchivo, tamañoInicial, tamañoMaximo, tamañoCrecimiento, FGselected, db);
                 $(document).ready(function() {
                     $.ajax({
                         url: "php/AddFile.php",
@@ -466,11 +466,11 @@ function getRadioButtonSelectedValue(ctrl) {
  * @param {type} FileGroup Nombre del FileGroup que desea asociar al archivo
  * @returns {String} El query para ejecutar en el motor de base de datos
  */
-function queryAddFile(nombre,tamañoInicial,tamañoMaximo,tamañoCrecimiento,FileGroup) {
+function queryAddFile(nombre, tamañoInicial, tamañoMaximo, tamañoCrecimiento, FileGroup, database) {
     path = "C:\\Program Files\\Microsoft SQL Server\\MSSQL11.MSSQLSERVER\\MSSQL\\DATA\\";
     query = "USE master" +
             " ALTER DATABASE " +
-            db +
+            database +
             " ADD FILE(" +
             " NAME=" + nombre + "," +
             " FILENAME=" + "'" + path + nombre + ".ndf'," +
@@ -480,6 +480,60 @@ function queryAddFile(nombre,tamañoInicial,tamañoMaximo,tamañoCrecimiento,Fil
             ") " +
             "TO FILEGROUP " + FileGroup + ";";
     return query;
+}
+
+function addDatabase() {
+    var finalquery = "create database " + $('#databaseName').val() + "\ngo\n\n";
+    finalquery += "use " + $('#databaseName').val() + ";";
+    finalquery += "create login " + $('#administrator').val() + " with password = '" + $('#administratorPassword').val() + "';";
+    finalquery += "create user " + $('#databaseName').val() + "admin for login " + $('#administrator').val() + ";";
+    finalquery += "create role \[administration\] authorization \[dbo\];";
+    finalquery += "alter role [administration\] add member \[" + $('#databaseName').val() + "admin\];";
+    $('#filegroupsContainer').children('div').each(function() {
+        var elements = $($(this).children('div')[0]).children('input');
+        elementCount = elements.length;
+        if ($(elements[0]).val() == "")
+            alert("Debe indicar el nombre del Filegroup.");
+        else {
+            finalquery += "alter database " + $('#databaseName').val() + " add filegroup " + $(elements[0]).val() + ";";
+            for (index = 2; index < elementCount; index++) {
+                if ($(elements[index]).val() == "" || $(elements[index + 1]).val() == "" || $(elements[index + 2]).val() == "" || $(elements[index + 3]).val() == "")
+                    alert("Debe indicar todos los datos para los archivos.");
+                else {
+                    finalquery += queryAddFile($(elements[index]).val(), $(elements[index + 1]).val(), $(elements[index + 2]).val(), $(elements[index + 3]).val(), $(elements[0]).val(),$('#databaseName').val());
+                }
+                index += 3;
+            }
+        }
+    }); alert (finalquery);
+    $(document).ready(function() {
+        $.ajax({
+            url: "php/AddFile.php",
+            type: "post",
+            data: {server: server,
+                db: db,
+                user: user,
+                pass: pass,
+                query: finalquery
+            }
+        }).done(function(response) {
+            if (response == -1) {
+                alert("Error de conexion");
+            }
+            else {
+                if (response == -2) {
+                    alert("Error en la consulta");
+                }
+                else {
+                    if (response == -3)
+                        alert("Base de Datos creada con éxito");
+                    else
+                        alert("Error de conexión");
+                }
+            }
+        });
+    });
+    showNewDatabaseInterface();
 }
 
 
