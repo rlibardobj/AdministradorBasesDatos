@@ -4,6 +4,9 @@ var server;
 var db;
 var user;
 var pass;
+
+//Variable para crear los espacios para creación de nuevos filegroups
+//cuando se está creando una nueva base de datos.
 var fileGroups = 0;
 
 /**
@@ -343,7 +346,7 @@ function addFileField(filegroup) {
 }
 
 /**
- * 
+ * Muestra la nterfaz para añadir una nueva base de datos.
  * @returns {undefined}
  */
 function showNewDatabaseInterface() {
@@ -482,6 +485,12 @@ function queryAddFile(nombre, tamañoInicial, tamañoMaximo, tamañoCrecimiento,
     return query;
 }
 
+/**
+ * Construye la consulta con absolutamente todos los detalles 
+ * de la creación de la base de datos indicados por el usuario
+ * y la ejecuta, dando como resultado su creación.
+ * @returns {undefined}
+ */
 function addDatabase() {
     var finalquery = "create database " + $('#databaseName').val() + "\ngo\n\n";
     finalquery += "use " + $('#databaseName').val() + ";";
