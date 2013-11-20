@@ -12,7 +12,7 @@ if (!$conn) {
 } else {
     $stmt = sqlsrv_query($conn, $query);
     if ($stmt === FALSE)
-        $return = -2; //error query
+        $return =-2; //error query
     else {
         $return = -3; //realizado exitosamente
     }

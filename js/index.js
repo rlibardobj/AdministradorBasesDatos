@@ -492,7 +492,7 @@ function queryAddFile(nombre, tamañoInicial, tamañoMaximo, tamañoCrecimiento,
  * @returns {undefined}
  */
 function addDatabase() {
-    var finalquery = "create database " + $('#databaseName').val() + "\ngo\n\n";
+    var finalquery = "create database " + $('#databaseName').val() + ";";//"\n\n go \n\n";
     finalquery += "use " + $('#databaseName').val() + ";";
     finalquery += "create login " + $('#administrator').val() + " with password = '" + $('#administratorPassword').val() + "';";
     finalquery += "create user " + $('#databaseName').val() + "admin for login " + $('#administrator').val() + ";";
@@ -526,6 +526,7 @@ function addDatabase() {
                 query: finalquery
             }
         }).done(function(response) {
+            // $("#titulo").html(finalquery);
             if (response == -1) {
                 alert("Error de conexion");
             }
@@ -536,12 +537,11 @@ function addDatabase() {
                 else {
                     if (response == -3)
                         alert("Base de Datos creada con éxito");
-                    else
-                        alert("Error de conexión");
                 }
             }
         });
     });
+    
     showNewDatabaseInterface();
 }
 
